@@ -13,6 +13,7 @@ class App extends Component {
         this.vendor = Vendor()
     }
     render() {
+        console.log('devTool test!')
         return (
             <div className="index-box">
                 <p>Hello World by index page !</p>

@@ -3,7 +3,6 @@ const webpack = require('webpack');
 const HtmlPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');//清除多余文件
 const Manifest = require('webpack-manifest-plugin');
-
  module.exports = {
     devtool: 'inline-source-map',
     mode: 'development',
@@ -14,7 +13,7 @@ const Manifest = require('webpack-manifest-plugin');
         // vendor: './src/vendor/index.js', // webpack4 不鼓励这样做，建议 optimization.runtimeChunk 
     },
     output: {
-        filename: '[name].[hash:5].bundle.js',
+        filename: '[name].[contenthash:5].bundle.js',
         path: path.resolve(__dirname, 'build')
     },
     resolve: {
@@ -75,10 +74,19 @@ const Manifest = require('webpack-manifest-plugin');
         ],
     },
     optimization: {
-        splitChunks: {
-            chunks: 'all'
-        },
+        // splitChunks: {
+        //     chunks: 'all'
+        // },
         runtimeChunk: 'single',
+        splitChunks: {
+            cacheGroups: {
+              vendor: {
+                test: /[\\/]node_modules[\\/]/,
+                name: 'vendors',
+                chunks: 'all',
+              },
+            },
+          },
         // runtimeChunk: {
         //     name: 'manifest'
         // }
@@ -93,11 +101,11 @@ const Manifest = require('webpack-manifest-plugin');
         inline: true,
         hot: true,
         allowedHosts: [], // 白名单
-        // publicPath: 'localhost:3000'
+        // publicPath: path.resolve(__dirname, './serve')
     },
     plugins: [
         new CleanWebpackPlugin(),
-        new webpack.HotModuleReplacementPlugin(),
+        // new webpack.HotModuleReplacementPlugin(),
         new HtmlPlugin({
             inject: true,
             chunks: ["index"],
