@@ -24,54 +24,7 @@ const Manifest = require('webpack-manifest-plugin');
         }
     },
     module: {
-        rules: [{
-            test: /\.css$/,
-            loader:['style-loader', 'css-loader']
-        }, {
-            test: /\.scss$/,
-            loader: ['style-loader', 'css-loader', 'sass-loader']
-        }, {
-            test: /\.(png|svg|jpg|gif)$/,
-            loader: 'url-loader',
-            options: {
-                limit: 10000,
-                name: 'img/[name].[hash:7].[ext]'
-            }
-        }, {
-            test: /\.(js|jsx)$/,
-            loader: 'babel-loader',
-            exclude: /node_modules/
-        }, {
-            test: /\.js$/,
-            use: [
-                {
-                    loader: path.resolve(__dirname, './loader/loader.js'),
-                    options: {
-                        layout: 'Hellow~',
-                        name: '😀'
-                    }
-                },
-                
-            ],
-        }, 
-        // webpack5 内置
-        // {
-        //     test: /\.(png|svg|jpg|jpeg|gif)$/i,
-        //     type: 'asset/resource',
-        //   },
-        {
-            test: /\.(png|jpg|jpeg|gif|eot|woff|woff2|ttf|svg|otf|svg)$/,
-            use:[
-              {
-                loader: 'url-loader',
-                options:{
-                  limit: 8192,
-                  name: `layout/[name].[ext]`
-                }
-              }
-            ]
-          },
-        ],
+        rules: [],
     },
     optimization: {
         // splitChunks: {
@@ -93,6 +46,7 @@ const Manifest = require('webpack-manifest-plugin');
         // runtimeChunk: {
         //     name: entrypoint => `runtimechunk~${entrypoint.name}`
         // }
+        // minimize: true,
     },
     devServer: {
         inline: false,
@@ -104,14 +58,12 @@ const Manifest = require('webpack-manifest-plugin');
         // publicPath: path.resolve(__dirname, './serve')
     },
     plugins: [
-        new CleanWebpackPlugin(),
-        // new webpack.HotModuleReplacementPlugin(),
         new HtmlPlugin({
             inject: true,
             chunks: ["index"],
             filename: 'index.html',
             template: 'src/index.html',
-            title: 'development'
+            title: 'My app'
         }),
         // new HtmlPlugin({
         //     inject: true,
