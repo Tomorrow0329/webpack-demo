@@ -1,30 +1,17 @@
 const path = require('path');
 const webpack = require('webpack');
+const merge = require('webpack-merge')
 const HtmlPlugin = require('html-webpack-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');//清除多余文件
 const Manifest = require('webpack-manifest-plugin');
- module.exports = {
+const baseConfig = require('./config.base')
+
+const prodConfig = {
     devtool: 'inline-source-map',
-    mode: 'development',
+    mode: 'production',
     // watch: true,
-    entry: {
-        index: './src/index.js',
-        // about: './src/about.js',
-        // vendor: './src/vendor/index.js', // webpack4 不鼓励这样做，建议 optimization.runtimeChunk 
-    },
     output: {
         filename: '[name].[contenthash:5].bundle.js',
-        path: path.resolve(__dirname, 'build')
-    },
-    resolve: {
-        // extensions: ['.js'],
-        alias: {
-            "@": path.resolve(__dirname, './'),
-            "src": path.resolve(__dirname, './src')
-        }
-    },
-    module: {
-        rules: [],
+        path: path.resolve(__dirname, '../build')
     },
     optimization: {
         // splitChunks: {
@@ -48,15 +35,6 @@ const Manifest = require('webpack-manifest-plugin');
         // }
         // minimize: true,
     },
-    devServer: {
-        inline: false,
-        contentBase: './build',
-        port: 8081,
-        inline: true,
-        hot: true,
-        allowedHosts: [], // 白名单
-        // publicPath: path.resolve(__dirname, './serve')
-    },
     plugins: [
         new HtmlPlugin({
             inject: true,
@@ -65,12 +43,8 @@ const Manifest = require('webpack-manifest-plugin');
             template: 'src/index.html',
             title: 'My app'
         }),
-        // new HtmlPlugin({
-        //     inject: true,
-        //     chunks: ["about"],
-        //     filename: 'about.html',
-        //     template: 'src/about.html'
-        // }),
         new Manifest(), // Manifest 表达了每个模块与bundle.js中的映射
     ]
 }
+
+module.exports = merge(baseConfig, prodConfig);

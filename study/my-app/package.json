@@ -5,9 +5,9 @@
   "private": true,
   "scripts": {
     "watch": "webpack --watch",
-    "build": "webpack --mode production",
-    "dev": "webpack --progress  --mode development& webpack-dev-server --open  --mode development",
-    "start": "webpack-dev-server --config ./webpack/config.dev.js --open --mode development --progress",
+    "build": "webpack --config ./webpack/config.prod.js --env.NODE_ENV=test",
+    "dev": "webpack-dev-server --config ./webpack/config.dev.js --open --progress",
+    "start": "npm run dev",
     "watch-serve": "webpack serve --open"
   },
   "keywords": [],

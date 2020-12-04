@@ -14,6 +14,9 @@ const devConfig = {
         filename: '[name].bundle.js',
         path: path.resolve(__dirname, '../build')
     },
+    cache: {
+        type: 'memory', // 提高性能tip3: 使用缓存，开发环境默认为 ‘memory’(memory === true)，生产环节默认 false
+    },
     module: {
         rules: [],
     },

@@ -14,7 +14,8 @@ const Manifest = require('webpack-manifest-plugin');
         alias: {
             "@": path.resolve(__dirname, '../'),
             "src": path.resolve(__dirname, '../src')
-        }
+        },
+        symlinks: false, // 提高性能tip2
     },
     module: {
         rules: [{
@@ -33,7 +34,7 @@ const Manifest = require('webpack-manifest-plugin');
         }, {
             test: /\.(js|jsx)$/,
             loader: 'babel-loader',
-            exclude: /node_modules/
+            exclude: /node_modules/ // 提高性能tip1：使用 include、exclude 属性，来精确指定loader的应用范围，从而达到提高性能的目的
         }, 
         // webpack5 内置
         // {
