@@ -1,6 +1,7 @@
 import React,{Component} from 'react';
 import ReactDom from 'react-dom';
 import Vendor from 'src/vendor'
+import { prefetchFn } from './vendor/prefetch'
 import './index.scss'
 
 if (module.hot) {
@@ -10,9 +11,10 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.state = {  };
-        this.vendor = Vendor()
+        this.vendor = prefetchFn()
     }
     render() {
+        // 我是一个可爱的注释
         console.log('devTool test!')
         return (
             <div className="index-box">

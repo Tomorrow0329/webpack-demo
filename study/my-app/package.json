@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "private": true,
+  "sideEffects": false,
   "scripts": {
     "watch": "webpack --watch",
     "build": "webpack --config ./webpack/config.prod.js --env.NODE_ENV=test",
@@ -27,8 +28,10 @@
     "html-webpack-plugin": "^4.5.0",
     "husky": "^4.3.0",
     "node-sass": "^4.10.0",
+    "optimize-css-assets-webpack-plugin": "^5.0.4",
     "sass-loader": "^10.1.0",
     "style-loader": "^2.0.0",
+    "uglifyjs-webpack-plugin": "^2.2.0",
     "url-loader": "^4.1.1",
     "webpack": "^4.44.2",
     "webpack-cli": "^3.3.12",

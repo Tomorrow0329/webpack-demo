@@ -3,6 +3,8 @@ const webpack = require('webpack');
 const merge = require('webpack-merge')
 const HtmlPlugin = require('html-webpack-plugin');
 const Manifest = require('webpack-manifest-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const baseConfig = require('./config.base')
 
 const prodConfig = {
@@ -34,6 +36,19 @@ const prodConfig = {
         //     name: entrypoint => `runtimechunk~${entrypoint.name}`
         // }
         // minimize: true,
+        minimizer: [
+          new UglifyJsPlugin({
+            cache: true,
+            parallel: true,
+            uglifyOptions: {
+              compress: {
+                drop_debugger: true,
+                drop_console: false
+              }
+            }
+          }),
+          new OptimizeCSSAssetsPlugin({})
+        ]
     },
     plugins: [
         new HtmlPlugin({
