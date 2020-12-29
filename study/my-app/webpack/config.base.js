@@ -3,6 +3,7 @@ const webpack = require('webpack');
 const HtmlPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');//清除多余文件
 const Manifest = require('webpack-manifest-plugin');
+const HellowWordPlugin = require('../plugin/index');
  module.exports = {
     entry: {
         index: path.resolve(__dirname, '../src/index.js'),
@@ -89,5 +90,6 @@ const Manifest = require('webpack-manifest-plugin');
     plugins: [
         new CleanWebpackPlugin(),
         new Manifest(), // Manifest 表达了每个模块与bundle.js中的映射
+        new HellowWordPlugin({ options: true }),
     ]
 }

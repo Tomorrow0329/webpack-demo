@@ -1035,9 +1035,10 @@ class Server {
   }
 }
 
-// Export this logic,
-// so that other implementations,
-// like task-runners can use it
+
+// Export this logic, 导出此逻辑，
+// so that other implementations,以便其他实现（例如任务运行程序）
+// like task-runners can use it 可以使用它
 Server.addDevServerEntrypoints = require('./utils/addEntries');
 
 module.exports = Server;
