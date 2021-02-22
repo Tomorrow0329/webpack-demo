@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .box {
+            width: 600px;
+            height: 500px;
+            background: lavender;
+        }
+
+        .box table {
+            border:1px solid black;
+        }
+    </style>
+</head>
+<body>
+<input type="text" class="demo">
+<div class="box">
+    <table>
+        <tr>
+            <th>标题1</th>
+            <th>标题2</th>
+            <th>标题3</th>
+        </tr>
+        <tr>
+            <td>表格1</td>
+            <td>表格2</td>
+            <td>表格3</td>
+        </tr>
+    </table>
+</div>
+</body>
+<script src="jquery-3.2.1.min.js"></script>
+<script src="index.js"></script>
+<script>
+    var setZeroes = function(matrix) {
+    let rowList = new Set();
+    let colList = new Set();
+    let len;
+    let newMatrix = [];
+
+    matrix.forEach((row, i) => {
+      len = row.length;
+      let pos = 0;
+
+      while(pos < len){
+        pos = row.indexOf(0);
+        if (pos <= -1) break;
+        colList.add(pos);
+        rowList.add(i);
+        pos += 1;
+      }
+    })
+
+    matrix.forEach((row, i) => {
+      const rowItem = Object.assign([], row);
+      if (rowList.indexOf(i) > -1) {
+        rowItem.fill(0);
+      } else {
+        colList.forEach(col => {
+          rowItem[col] = 0;
+        })
+      }
+      newMatrix[i] = rowItem;
+    })
+
+    return newMatrix;
+
+};
+console.log(setZeroes([[1,1,1],[1,0,1],[1,1,1]]))
+</script>
+</html>
